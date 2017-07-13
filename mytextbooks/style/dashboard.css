@@ -1,0 +1,97 @@
+@font-face {
+    font-family: logofont;
+    src: url('../style/logofont.otf');
+}
+
+@font-face {
+    font-family: headingfont;
+    src: url('../style/headingfont.otf');
+}
+logo{
+	font-family: logofont;
+	font-size:2em;
+	display:inline-block;	
+	margin-top:5px;
+}
+
+#tabcontent{
+	width:100%;
+	text-align:center;
+}
+#preloader
+			{
+				
+				margin:0 auto;
+				z-index: 100;
+				padding: 5px;
+				text-align: center;
+				background-color: #FFFFFF;
+				
+			}
+			
+h3{
+	
+	
+}
+
+
+
+
+
+.tabs-menu li.current {	
+    
+    
+
+}
+
+#tabs-container{
+	
+	margin:0 auto;
+	width:95%;
+	border:1px solid #7e7e7e;
+}
+
+#details{
+	text-align:left;
+}
+
+.tab-content {
+	
+	background-color:white;
+    padding: 10px;
+    display: none;
+}
+
+#tab-1 {
+ display: block;   
+}	
+
+p3{
+	font-family:"Segoe UI",Arial,sans-serif;
+}
+
+
+
+
+
+
+
+
+
+
+	
+@media screen and (min-width: 55.0625em)
+{
+  	
+.tab-content {
+	text-align:left;
+}
+
+#tabs-container{
+	width:50%;
+}
+
+html{
+	text-align:left;
+}
+}	

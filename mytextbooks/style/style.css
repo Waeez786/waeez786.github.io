@@ -1,0 +1,88 @@
+html,body{
+  margin: 0;
+  text-align:center;
+}
+
+@font-face {
+    font-family: logofont;
+    src: url('../style/logofont.otf');
+}
+
+@font-face {
+    font-family: headingfont;
+    src: url('../style/headingfont.otf');
+}
+
+logo{
+	font-family: logofont;
+	font-size:2em;
+	display:inline-block;	
+	margin-top:5px;
+}
+
+h1{
+	font-family:headingfont;
+	color:white;
+	font-size:20pt;
+}
+
+h2{
+	font-family:headingfont;
+	color:white;
+	padding-left:5px;
+	padding-right:5px;
+}
+
+#step{
+	width:80%;
+	padding:10px;
+	margin:0 auto;
+	font-size:15pt;
+	/*background: linear-gradient(90deg, #04304b 12%, green 15%);*/
+	background-color:rgba(9,108,168,0.45);
+	-webkit-box-shadow: 4px 4px 16px 1px rgba(120,120,120,0.9);
+    -moz-box-shadow: 4px 4px 16px 1px rgba(120,120,120,0.9);
+     box-shadow: 4px 4px 16px 1px rgba(120,120,120,0.9);
+	text-align:center;
+	
+}
+
+#bg{
+	background-image:url('../images/textbooks.jpg');
+  background-size:cover;
+  background-repeat: no-repeat;
+  background-position:center;
+}
+#search_dummy{
+	height:25px;
+	padding:5px;
+	font-size:15pt;
+	width: 50%; 
+	min-width:240px;
+	-webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+	border:none;
+}
+
+input:focus{
+	outline:none;
+	-webkit-box-shadow: 4px 4px 24px -3px rgba(122,117,122,1);
+    -moz-box-shadow: 4px 4px 24px -3px rgba(122,117,122,1);
+    box-shadow: 4px 4px 24px -3px rgba(122,117,122,1);
+}
+
+#logo{
+	text-align:center;
+	background-color:rgb(4,48,75);
+    color:white;
+	-webkit-box-shadow: 4px 4px 24px -3px rgba(122,117,122,1);
+    -moz-box-shadow: 4px 4px 24px -3px rgba(122,117,122,1);
+    box-shadow: 4px 4px 24px -3px rgba(122,117,122,1);
+	padding:10px;
+	
+	top:0;
+	right:0;
+	left:0;
+}
+	
