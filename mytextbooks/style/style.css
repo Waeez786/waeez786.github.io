@@ -17,14 +17,13 @@ logo{
 	font-family: logofont;
 	font-size:2em;
 	display:inline-block;	
-	margin-top:5px;
+	
+	border-radius:5px;
+	
+
 }
 
-h1{
-	font-family:headingfont;
-	color:white;
-	font-size:20pt;
-}
+
 
 h2{
 	font-family:headingfont;
@@ -45,14 +44,36 @@ h2{
      box-shadow: 4px 4px 16px 1px rgba(120,120,120,0.9);
 	text-align:center;
 	
+
+}
+
+#social{
+	padding:20px;
+	background:#333;
+	display:inline-block;
+	margin:10px;
+	border-radius:5px;
+	margin-bottom:20px;
 }
 
 #bg{
+	
 	background-image:url('../images/textbooks.jpg');
-  background-size:cover;
-  background-repeat: no-repeat;
-  background-position:center;
+	background-size:cover;
+	background-repeat: no-repeat;
+	background-position:center;
+	
 }
+#overlay1{
+	
+	background:rgba(255, 255, 255, 0.7);
+}
+
+#overlay2{
+	
+	background:rgba(37, 36, 36, 0.7);
+}
+
 #search_dummy{
 	height:25px;
 	padding:5px;
@@ -74,15 +95,21 @@ input:focus{
 
 #logo{
 	text-align:center;
-	background-color:rgb(4,48,75);
-    color:white;
-	-webkit-box-shadow: 4px 4px 24px -3px rgba(122,117,122,1);
-    -moz-box-shadow: 4px 4px 24px -3px rgba(122,117,122,1);
-    box-shadow: 4px 4px 24px -3px rgba(122,117,122,1);
+	
+    color:rgb(4,48,75);
+	
 	padding:10px;
 	
-	top:0;
+	padding-top:10px;
 	right:0;
 	left:0;
 }
-	
+
+@media screen and (min-width: 55.0625em)
+{
+
+
+}
+
+
+

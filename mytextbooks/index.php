@@ -1,115 +1,67 @@
-<?php
-require_once("/include/functions.php");
-session_start(); 
-if (logged_in()==true){
-header('Location:dashboard.php');
-}
-?>
-
-
-<?php
-require_once __DIR__.'/gplus-lib/vendor/autoload.php';
-
-const CLIENT_ID = '248087812732-j7vl34nhn6nck3c2n6j2d0i26qpudf8r.apps.googleusercontent.com';
-const CLIENT_SECRET = 'y7-b_40y7Zz0sweWdHKLas4_';
-const REDIRECT_URI = 'http://localhost/mytextbooks/dashboard.php';
-
-
-$client = new Google_Client();
-$client->setClientId(CLIENT_ID);
-$client->setClientSecret(CLIENT_SECRET);
-$client->setRedirectUri(REDIRECT_URI);
-$client->setScopes('email');
-
-$plus = new Google_Service_Plus($client);
-
-
-if (isset($_GET['code'])) {
-  $client->authenticate($_GET['code']);
-  $_SESSION['access_token'] = $client->getAccessToken();
-  $redirect = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
-  header('Location: ' . filter_var($redirect, FILTER_SANITIZE_URL));
-}
-
-if (isset($_SESSION['access_token']) && $_SESSION['access_token']) {
-  $client->setAccessToken($_SESSION['access_token']);
-  $me = $plus->people->get('me');
-
-  // Get User data
-  $_SESSION['GID'] = $me['id'];
-  $_SESSION['FULLNAME'] =  $me['displayName'];
-  $_SESSION['EMAIL'] =  $me['emails'][0]['value'];
-  $_SESSION['DP'] = $me['image']['url'];
-
-
-} else {
-  // get the login url   
-  $authUrl = $client->createAuthUrl();
-}
-
-
-?>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title></title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
-<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> !-->
 <meta name="description" content="" />
 <link rel="stylesheet" type="text/css" href="style/style.css" />
 <link rel="stylesheet" type="text/css" href="style/loginbtn.css" />
+<!--<link rel="stylesheet" type="text/css" href="style/loginbtn.css" />
 <link rel="stylesheet" href="style/footer.css">
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-<link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet" type="text/css">
-<link rel="icon" type="image/icon" href="">
+<link rel="icon" type="image/icon" href="">-->
+<script src="https://use.fontawesome.com/942cae4c16.js"></script>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
 <script>
-function search()
-{
-	  window.location.href= "#popupLogin";
-};
+function filter() {
+	$('.dropdown').addClass('open');
+}
 </script>
-<style>
-.ui-select{
-	width:120px;
-	margin:0 auto;
-	display:inline-block;
-}
-.ui-btn{
-	margin:0;
-	position:static;
-}
-.ui-btn-inline {
-	 vertical-align:top;
- }
+ <style>
 
-.ui-input-text{
-  width:80%; 
-  margin:0 auto;
-}	
-.ui-btn-inline
-{
-  vertical-align:center;
+.dropdown.dropdown-lg .dropdown-menu {
+    margin-top: -1px;
+    padding: 4px 15px;
 }
-.ui-btn{
-  padding:7px;
-}  
-</style>
+
+.btn-group .btn {
+    border-radius: 0;
+    margin-left: -1px;
+}
+.form-horizontal .form-group {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+
+@media screen and (min-width: 768px) {
+    #boot-search-box {
+        width: 500px;
+        margin: 0 auto;
+    }
+    .dropdown.dropdown-lg {
+        position: static !important;
+    }
+    .dropdown.dropdown-lg .dropdown-menu {
+        min-width: 500px;
+    }
+}
+    </style>
+
 </head>
 <body>
 <div id="bg">
+<div id="overlay1">
 <div id="logo">
+<img style="width:50px;height:50px;margin-bottom:10px;"src="images/logo1.svg"><br>
 <logo>myTextbooks</logo>
 </div>
 <!--<br><br><br><br>!-->
-<h1>Buy or Sell your used textbooks online</h1>
+
+<h1 style="margin-top:-10px;font-weight:600;font-family:Trebuchet MS;color:#333;font-size:16pt;line-height:1.3;">A marketplace to buy or sell textbooks</h1>
 <!-- 
  <select name="select-choice-a" id="select-choice-a" " data-native-menu="false">
                 <option>College</option>
@@ -128,23 +80,65 @@ function search()
 		
 <input type="button" style="color:white;" data-inline="true" value="Search">
 !-->	
-<a  href="#searchbox" data-rel="popup" data-position-to="window"><input type="text" id="search_dummy" style="width:80%;" placeholder="Search for textbooks.."></a>	
-<div data-role="popup" id="searchbox" data-overlay-theme="a" class="ui-corner-all">
-						</div>
-
-
-
-<h2>Sell your used textbooks in 3 easy steps</h2>
-<div id="step"><p style="font-size:20pt;margin:0;color:white;font-weight:bold;font-family:logofont;display:inline-block;margin-right:5px;">Step 1 :  </p><a href="fbconfig.php"> <button class="loginBtn loginBtn--facebook">Continue with Facebook</button></a><a href="<?php echo $authUrl; ?>"><button class="loginBtn loginBtn--google">Continue with Google  </button></a></div><br>
-
-
-
-<div id="step"><p style="font-size:20pt;margin:0;color:white;font-weight:bold;font-family:logofont;display:inline-block;margin-right:5px;">Step 2 :</p><p style="color:white;font-size:20pt;margin:0;font-weight:bold;font-family:headingfont;display:inline-block;"> Enter details of your books, course and college</p></div><br>
-<div id="step"><p style="font-size:20pt;margin:0;color:white;font-weight:bold;font-family:logofont;display:inline-block;margin-right:5px;">Step 3 :</p><p style="color:white;font-size:20pt;margin:0;font-weight:bold;font-family:headingfont;display:inline-block;"> And you're done! Just relax while buyers contact you</p></div>
-<br><br>
+<div style="margin-top:20px;"class="container">
+	<div class="row">
+		<div class="col-md-12">
+            <div class="input-group" id="boot-search-box">
+                <input type="text" class="form-control "  placeholder="Search for Textbooks" />
+                <div class="input-group-btn">
+                    <div class="btn-group" role="group">
+                        <div class="dropdown dropdown-lg">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><strong>Filter</strong></button>
+                            <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                <form class="form-horizontal" role="form">
+                                  <div class="form-group">
+                                    <label for="filter">Narrow the search:</label>
+                                    <select class="form-control">
+                                        <option value="catalogue" selected>Whole catalogue</option>
+                                        <option value="modal">Modal</option>
+                                        <option value="price">Price</option>
+                                        <option value="popular">Most Popular</option>
+                                    </select>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="contain">Brand:</label>
+                                    <input class="form-control" type="text" />
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="contain">Category:</label>
+                                    <input class="form-control" type="text" />
+                                  </div>
+                                  
+                                 <div class="form-group">
+                                    <label for="password1" class="col-sm-3 control-label">Price Range:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" id="max-price" placeholder="Max"> <br /><br /> 
+                                    <input type="text" class="form-control" id="min-price" placeholder="Min">
+                                </div>
+                                  <br /><br /><br /><br />                        
+                                  <button type="submit" style="background-color:rgb(4, 48, 75);" class="btn btn-primary btn-block">Search <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                </form>
+                            </div>
+                        </div>
+                        <button type="button" style="background-color:rgb(4, 48, 75);border-color:rgb(4, 48, 75);" class="btn btn-success "><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+	</div>
 </div>
 
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
+
+<div id="social">
+<h2 style="margin-top:0px;font-weight:800;font-family:Trebuchet MS;color:white;font-size:16pt;">To sell your textbooks</h2>
+<a href="fbconfig.php"> <button class="loginBtn loginBtn--facebook">Continue with Facebook</button></a><br>
+<a href="<?php echo $authUrl; ?>"><button class="loginBtn loginBtn--google">Continue with Google  </button></a>
+</div>
+<!--
 
 <footer class="footer-distributed">
 
@@ -199,9 +193,53 @@ function search()
 
 			</div>
 
-		</footer>
+		</footer>!-->
+		</div>
+		<div style="padding:10px;top:0;bottom:0;background-color:white;font-weight:600;font-family:Trebuchet MS;font-size:16pt;line-height:1.3;color:#333;">
+		<p style="margin:0;padding-top:10px;padding-bottom:10px;font-weight:bolder;font-size:19pt;color:rgb(4,48,75);">WHAT IS MY TEXTBOOKS?</p>
+		<span style="margin-top:10px;" class="fa-stack fa-2x">
+                        
+                        <i class="fa fa-map-marker fa-stack-2x "></i>
+						</span>
+						<p style="margin:0;padding-top:10px;padding-bottom:10px;">My Textbooks saves you the trouble of travelling to the jam packed Avenue road to sell or buy textbooks</p>
+		</div>
+		
+		<div id="overlay2">
+			<div class="container">
+			<div style="padding-top:15px;" class="row">
+						<div style="padding-top:35px;" class="col-sm-4" >
+						<span class="fa-stack fa-4x">
+                        
+                        <i class="fa fa-sign-in fa-stack-2x fa-inverse"></i>
+						</span>
+						<h4 style="font-weight:600;font-family:Trebuchet MS;font-size:16pt;line-height:1.3;color:white;" >Login with Google or Facebook accounts</h4>
+						
+						
+						</div>
+						
+						
+						<div style="padding-top:35px;" class="col-sm-4" >
+							<span class="fa-stack fa-4x">
+                        
+                        <i class="fa fa-file-text fa-stack-2x fa-inverse"></i>
+						</span>
+						<h4 style="font-weight:600;font-family:Trebuchet MS;font-size:16pt;line-height:1.3;color:white;" >Submit an Ad for your textbooks</h4>
+						
+						</div>
+						<div style="padding-top:35px;" class="col-sm-4" >
+							<span class="fa-stack fa-4x">
+                        
+                        <i class="fa fa-mobile fa-stack-2x fa-inverse"></i>
+						</span>
+						<h4 style="font-weight:600;font-family:Trebuchet MS;font-size:16pt;line-height:1.3;color:white;" >Relax while buyers contact you.</h4>
+						
+						</div>
+				</div>
+			</div>
+		
+		</div>
 </div>
-</div>
+
 
 </body>
 </html>
