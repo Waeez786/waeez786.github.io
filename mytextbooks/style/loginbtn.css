@@ -36,6 +36,7 @@
   font-family: "Helvetica neue", Helvetica Neue, Helvetica, Arial, sans-serif;
   text-shadow: 0 -1px 0 #354C8C;
   font-weight:bold;
+  width:245.9px;
 }
 .loginBtn--facebook:before {
   border-right: #364e92 1px solid;
