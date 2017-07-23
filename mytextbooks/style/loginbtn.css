@@ -36,7 +36,8 @@
   font-family: "Helvetica neue", Helvetica Neue, Helvetica, Arial, sans-serif;
   text-shadow: 0 -1px 0 #354C8C;
   font-weight:bold;
-  width:245.9px;
+  width:100%;
+  margin-left:0;
 }
 .loginBtn--facebook:before {
   border-right: #364e92 1px solid;
@@ -54,7 +55,8 @@
   font-family: "Roboto", Roboto, arial, sans-serif;
   background: #DD4B39;
   font-weight:bold;
-  width:245.9px;
+  width:100%;
+  margin-left:0;
   
 }
 .loginBtn--google:before {
