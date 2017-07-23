@@ -54,14 +54,20 @@ h2{
 	margin:10px;
 	border-radius:5px;
 	margin-bottom:20px;
+	margin-top:20px;
 }
 
 #bg{
 	
-	background-image:url('../images/textbooks.jpg');
+	/*background-image:url('../images/textbooks.jpg');
 	background-size:cover;
 	background-repeat: no-repeat;
-	background-position:center;
+	background-position:center;*/
+	background: url('../images/textbooks.jpg') no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 	
 }
 #overlay1{
@@ -111,5 +117,60 @@ input:focus{
 
 }
 
+.footer {
+  padding-top:20px;
+  padding-bottom:30px;
+  width: 100%;
+  height: 100px;
 
+  text-align: center;
+}
+
+.container{
+ 
+  width: 100%;
+}
+
+.fa-twitter {
+    color: #4099FF;
+}
+
+.fa-facebook {
+    color: #3B5998;
+}
+
+.fa-youtube-play {
+    color: #e52d27;
+}
+
+.fa-rss {
+    color: #FF6600;
+}
+
+.fa-vine {
+    color: #00a478;
+}
+
+.fa-flickr {
+    color: #ff0084;
+}
+
+.fa-twitch {
+    color: #6441A5;
+}
+
+.fa-linkedin {
+    color: #007bb6;
+}
+
+.fa {
+    opacity: 1;
+    transition: 1s;
+    -webkit-transition: 1s;
+}
+
+.fa:hover{
+    opacity: 1;
+    transition: 1s;
+    -webkit-transition: 1s;
 
